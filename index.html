@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABNT Conversor</title>
+    <script>
+        function conversorABNT() {
+            //alert("teste");
+            var resultado = document.getElementById("resultado");
+            var nome = document.getElementById("nome").value;
+            var arrayNome = [];
+
+            arrayNome = nome.trim().split(/\s+/).join(' ').split(' ');
+            arrayNome.unshift(arrayNome.pop(arrayNome[arrayNome.length - 1]).toUpperCase() + ',');
+            
+            if (arrayNome.length > 2) {
+		        var arrayNome2 = arrayNome.slice(2, arrayNome.length);
+		        arrayNome.splice(2);
+		        arrayNome2.forEach(element => {
+			        var abreviacao = element.charAt();
+			        if (
+                            element == 'das' ||
+                            element == 'do' ||
+                            element == 'dos' ||
+                            element == 'de' ||
+                            element == 'da' ||
+                            element == 'e'
+			        ) {
+			        } else {
+				            arrayNome[arrayNome.length] = `${abreviacao.toUpperCase()}.`;
+			        }
+		        });
+	        }
+            resultado.innerHTML = arrayNome.join(' ');
+        }
+    </script>
+</head>
+<body style="background-color: darkorange;">
+    <div style="text-align: center;">
+        <h1>CONVERSOR ABNT</h1>
+        <label for="nome">Nome:</label>
+        <input style="width: 400px;" type="text" id="nome" name="nome" value="Plínio Bezerra Câmara Campos"><br><br>
+        <input type="button" onclick="conversorABNT()" value="Converter">
+        <h2 id="resultado" style="margin-top: 100px;"></h2>
+    </div>
+</body>
+</html>
